@@ -41,7 +41,6 @@ class MultiHeadAttention(nn.Module):
     
         return attention, weights
 
-
     def split_heads(self, x, batch_size):
         """
         The original tensor with dimension batch_size * seq_length * d_model is split into num_heads 
@@ -66,7 +65,7 @@ class MultiHeadAttention(nn.Module):
         scores, weights = self.scaled_dot_product_attention(q, k, v, mask)
 
         # concatenate heads
-        concat = scores.transpose(1,2).contiguous().view(batch_size, -1, self.d_model)
+        concat = scores.transpose(1, 2).contiguous().view(batch_size, -1, self.d_model)
 
         # final linear layer
         output = self.W_o(concat)
